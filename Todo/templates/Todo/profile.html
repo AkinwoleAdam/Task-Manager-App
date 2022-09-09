@@ -1,0 +1,80 @@
+{% extends 'Todo/main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+<!---- successful update message ----->
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="mx-3 mt-2 alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<!---- end of message ------>
+<br>
+<a href="{% url 'home' %}" class="btn btn-primary mx-3 my-1">Go Back Home</a>
+<br>
+<div class="mx-2 my-3">
+  <div class="card mt-4">
+    <div class="card-body p-3">
+<h3 class="text-center card-text h1">My Profile</h3>
+<br>
+<div class="text-center">
+<img src="{{request.user.profile.avatar.url}}" alt="myprofilepic" class="img-fluid rounded-circle w-50 mb-4">
+  </div>
+  
+  
+  <!-------- Form --------->
+  
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for field in form %}
+  <label class="m-1 mb-2 fw-bold">{{field.label}}</label>
+    <h2 class="d-block mb-3">{{field}}</h2>
+  {% endfor %}
+  
+  <label class="mb-2 my-2 text-left fw-bold">Username</label>
+  <h2 class="d-block w-100">{{update_form.username}}</h2>
+  
+  <br>
+  
+    <label class="mb-2 text-left fw-bold">Email</label>
+  <h2 class="d-block w-100">{{update_form.email}}</h2>
+    <br>
+    
+  <button type="submit" class="btn btn-primary btn-md text-center mt-2 mb-2">
+    Update Profile
+    </button>
+    
+</form>
+
+<!----- End of Form -------->
+
+</div>
+  </div>
+     </div>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'Todo/main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register-TodoApp</title>
+</head>
+
+<body>
+  <div class="mx-3 my-4">
+  <h2 class="text-center fw-bold display-4 mb-3">Let's Create An Account For You
+  </h2>
+<!---- Error/Success message ----->
+
+<div>
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+</div>
+
+<!----- End of message ------>
+
+    <div class="card">
+        <div class="card-body">
+<form method="POST" action="">
+  
+  {% csrf_token %}
+  
+  {% for field in form %}
+  
+   <label class="mb-3 h6 fw-bold d-block
+ mx-2">
+    {{field.label}}
+  </label>
+  {{field}}
+
+    <br>
+  
+  {% endfor %}
+  
+  <div class="text-center">
+  <button type="submit" class="btn btn-success btn-block m-3">Create Account</button>
+</div>
+
+<h6 class="my-1 text-center">Have an account?<a href="{% url 'login' %}" class="text-link mx-1">Login here</a></h6>
+
+</form>
+</div>
+</div>
+
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}

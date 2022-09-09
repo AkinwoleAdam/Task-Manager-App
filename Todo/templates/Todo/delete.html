@@ -1,0 +1,45 @@
+{% extends 'Todo/main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delete Task/Todo App</title>
+</head>
+
+<body>
+  <div>
+    
+<a href="{% url 'home' %}" class="btn btn-primary btn-md mx-3 my-3">
+Go Back Home
+</a>
+
+<div class="card mx-3 my-5">
+<div class="card-body text-center p-3">
+  
+<h2 class="card-title display-3 fw-bold">"{{todo.title}}"</h2>
+
+<p class="card-text lead my-3 fw-bold">Are you sure you want to delete this task?<p>
+
+</div>
+
+<form method ="POST" class="text-center">
+ {% csrf_token %}
+ 
+<button type="submit" class="btn btn-danger mb-3">Confirm Delete
+</button>
+
+</form>
+
+</div>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}

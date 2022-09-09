@@ -1,0 +1,62 @@
+{% extends 'Todo/main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login/TodoApp</title>
+</head>
+
+<body>
+  
+  <div class="mx-3 my-5">
+    
+  <!---- Error/Success messages ---->
+  
+  <div>
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+</div>
+<!------ End of Message ------>
+
+
+<form method="POST" action='' class="form-control p-3 h-100">
+  {% csrf_token %}
+  
+  <h3 class="text-center h1 fw-bold m-3 mb-4">Sign In Into Your Account.</h3>
+  <label for="username" class="d-block mb-2 fw-bold my-1 mx-1">Username</label>
+<input type="text" name="username" class="form-control" placeholder="Enter correct username" required="True">
+<br>
+  <label for="password" class="d-block mb-2 fw-bold my-1 mx-1">Password</label>
+<input type="password" name="password" class="form-control" placeholder="Enter Password" required="True">
+<br>
+<div class="text-center">
+<button type="submit" class="btn btn-success my-4 btn-block w-75">Sign In</button>
+</div>
+<h5 class="m-4 text-center">Don't have an account?
+<a href="{% url 'register' %}" class="text-link text-dark m-1">Sign Up</a>
+</h5>
+</form>
+
+</div>
+</body>
+
+</html>
+
+{% endblock %}

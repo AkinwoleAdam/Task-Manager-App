@@ -1,0 +1,148 @@
+{% extends 'Todo/main.html' %}
+
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+
+ {% block content %}
+ 
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>  
+  <style>
+    .profile-img{
+      width:28%!important;
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <div class="my-2">
+{% if request.user.is_authenticated %}
+<div class="d-flex justify-content-between align-items-center mt-2">
+  
+<div class="ms-3">
+<a href="{% url 'profile' %}">
+<img src="{{request.user.profile.avatar.url}}" alt="myprofilepic" class="img-fluid rounded-circle profile-img">
+</a>
+</div>
+
+<div>
+<h1 class="h5 me-2 align-self-center">Welcome,{{request.user.username}}</h1>
+</div>
+
+</div>
+</div>
+
+{% else %}
+
+{% endif %}
+
+<div class="alert alert-success mx-3 mt-5" role="alert">
+  <h4 class="alert-heading">Hey There! &#9995;</h4>
+  <p>Thanks for taking your time to check out this project.<br>I am Akinwole Adam.<br>This TASK MANAGER APP is/was built mainly with Django as the focus on the Backend and Bootstrap5 for styling.</p>
+  <hr>
+  <p class="mb-0">If you ever want to reach out to me,I am available on <a href="https://twitter.com/the_tech_lord?t=q9r6Qht5rGndCjV8hi91AA&s=09">twitter</a> and <a href="https://github.com/AkinwoleAdam">github</a>.
+  <br>And hey..., I am open to jobs and interships opportunities.<br>Thank You &#10084;</p>
+</div>
+
+<h1 class="text-center display-3 fw-bold mt-5">MY TASKS</h1>
+
+<hr>
+
+<h2 class="mt-5 mb-3 text-center">
+  Refine your Tasks.
+</h2>
+<br>
+<!----- Filter Todos form ---->
+
+<div class="mx-3">
+<form method="get">
+  
+  {{ myFilter.form | crispy }}
+  
+  <br>
+  <div class="text-center">
+  <button type="submit" class="btn btn-outline-success mx-1 mb-2">
+    Search Todos
+    </button>
+    </div>
+</form>
+</div>
+<!----- End of form ----->
+
+
+<!--- Start of message ---->
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="mx-3 mt-2 alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<!---- End of Message ----->
+
+
+<!---- TODO MODEL ------->
+
+{% for todo in todos reversed %}
+
+<div>
+  <!----- Todo start ------>
+  
+<div class="mx-3 my-3">
+  <div class="card w-100 my-4">
+    <div class="card-body">
+      
+<h6>{{todo.date_updated}}</h6>
+{% if todo.completed == True %}
+<h2 class="card-title my-5 fw-bold"><strike>{{todo.title}}</strike></h2>
+{% else %}
+<h2 class="card-title my-5 fw-bold">
+  {{todo.title}}</h2>
+{% endif %}
+<div class="mt-5">
+<a href="{% url 'update' todo.id %}" class="btn btn-success">
+<i class="fas fa-edit h4 m-1"></i>
+</a>
+
+<a href="{% url 'delete' todo.id %}" class="btn btn-danger mx-2">
+  <i class="fa fa-trash h4 m-1"></i>
+  </a>
+</div>
+
+</div>
+</div>
+</div>
+
+<!----- End of Todo ----->
+
+
+{% empty %}
+
+<h3 class="text-center text-danger text-uppercase h2 fw-bold my-5">No Tasks...</h3>
+
+</div>
+
+{% endfor %}
+ 
+ <!---- End of TODO MODEL ----->
+ 
+</body>
+
+</html>
+
+ {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'Todo/main.html' %}
+ 
+ {% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <a href="{% url 'home' %}" class="btn btn-primary mx-3 my-3">Go Back Home</a>
+  <div class="mx-3 my-5 mt-3">
+    <div class="card my-auto">
+    <div class="card-body text-center">
+<h1 class="h3 text-center my-2 text-uppercase">Statistics</h1>
+
+<div class="text-center my-3">
+<h5>Total Tasks:</h5>
+<h4 class="h1">{{todos.count}}</h4>
+</div>
+
+<br>
+
+<div>
+<h5>Completed:</h5>
+<h4 class="h1 text-success">{{done}}</h4>
+</div>
+
+<br>
+
+<div>
+<h5>Incompleted:</h5>
+<h4 class="h1 text-danger">{{incomplete}}</h4>
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}

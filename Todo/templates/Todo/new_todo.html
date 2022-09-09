@@ -1,0 +1,42 @@
+{% extends 'Todo/main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <a href="{% url 'home' %}" class="btn btn-primary mx-3 my-3">Go Back Home</a>
+<div class="mx-4 my-3">
+  <h2 class="text-center">Create A Task</h2>
+<form method="POST" action="">
+
+{% csrf_token %}
+
+{% for field in form %}
+
+<label class="fw-bold mb-1">{{field.label}}</label>
+<h2 class="mb-3">{{field}}</h2>
+
+{% endfor %}
+
+<div class="text-center">
+<button type="submit" class="btn btn-success btn-md btn-block">
+  Create Task
+</button>
+</div>
+
+</form>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}
