@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9pg36qd_5fi-yy@=fl+w3my&ggl*l_9v^g88w(k09b5e^ilhd_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -87,10 +88,18 @@ WSGI_APPLICATION = 'Todoapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'railway',
+        'USER':'postgres',
+        'PASSWORD':'38ACvPkOAv7M1xG8RZbq',
+        'PORT':'7393',
+        'HOST':'containers-us-west-33.railway.app',
     }
 }
+
+#ALLOWED_HOSTS = ['notekeeper-app.up.railway.app','127.0.0.1']
+
+#CSRF_TRUSTED_ORIGINS = ['https://notekeeper-app.up.railway.app']
 
 
 # Password validation
