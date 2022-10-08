@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-9pg36qd_5fi-yy@=fl+w3my&ggl*l_9v^g88w(k09b5e^ilhd_
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['task-manager-app.up.railway.app','127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://task-manager-app.up.railway.app']
 
 
 # Application definition
@@ -96,11 +98,6 @@ DATABASES = {
         'HOST':'containers-us-west-33.railway.app',
     }
 }
-
-ALLOWED_HOSTS = ['task-manager-app.up.railway.app','127.0.0.1']
-
-CSRF_TRUSTED_ORIGINS = ['https://task-manager-app.up.railway.app']
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
