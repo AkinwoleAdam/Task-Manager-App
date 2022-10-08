@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9pg36qd_5fi-yy@=fl+w3my&ggl*l_9v^g88w(k09b5e^ilhd_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -97,9 +97,9 @@ DATABASES = {
     }
 }
 
-#ALLOWED_HOSTS = ['notekeeper-app.up.railway.app','127.0.0.1']
+ALLOWED_HOSTS = ['task-manager-app.up.railway.app','127.0.0.1']
 
-#CSRF_TRUSTED_ORIGINS = ['https://notekeeper-app.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://task-manager-app.up.railway.app']
 
 
 # Password validation
