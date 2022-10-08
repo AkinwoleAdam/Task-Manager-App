@@ -69,7 +69,7 @@ def profile(request):
   context = {'form':form,'update_form':update_form}
   return render(request,'Todo/profile.html',context)
   
-  
+@login_required(login_url='login')  
 def newTodo(request):
   form = TodoForm()
   context = {'form':form}
@@ -83,33 +83,33 @@ def newTodo(request):
       return redirect('home')
   return render(request,'Todo/new_todo.html',context)
     
-    
+@login_required(login_url='login')
 def updateTodo(request,pk):
-    todo = Todo.objects.get(id=pk)
-    form =TodoForm(instance=todo)
-    context = {'form':form}
-    if request.method == "POST":
-        form =TodoForm(request.POST,instance=todo)
+  todo = Todo.objects.get(id=pk,user=request.user)
+  form =TodoForm(instance=todo)
+  context = {'form':form}
+  if request.method == "POST":
+    form =TodoForm(request.POST,instance=todo)
     if form.is_valid():
-            form.save()
-            messages.success(request,'Task was updated successfully!') 
-            return redirect('/')
-    return render(request,'Todo/update.html',context)
+      form.save()
+      messages.success(request,'Task was updated successfully!')
+      return redirect('/')
+  return render(request,'Todo/update.html',context)
     
-        
+@login_required(login_url='login')
 def deleteTodo(request,pk):
-    todo = Todo.objects.get(id=pk)
-    context = {'todo':todo}
-    if request.method == "POST":
-        todo.delete()
-        messages.error(request,'Task was successfully deleted!')
-        return redirect('/')
-    return render(request,'Todo/delete.html',context)
+  todo = Todo.objects.get(id=pk,user=request.user)
+  context = {'todo':todo}
+  if request.method == "POST":
+    todo.delete()
+    messages.error(request,'Task was successfully deleted!')
+    return redirect('/')
+  return render(request,'Todo/delete.html',context)
     
- 
+@login_required(login_url='login')
 def report(request):
-     todos = Todo.objects.filter(user=request.user)
-     done = Todo.objects.filter(completed=True,user=request.user).count()
-     incomplete = Todo.objects.filter(completed=False,user=request.user).count()
-     context = {'todos':todos,'done':done,'incomplete':incomplete}
-     return render(request,'Todo/my_report.html',context)                                           
+  todos = Todo.objects.filter(user=request.user)
+  done = Todo.objects.filter(completed=True,user=request.user).count()
+  incomplete = Todo.objects.filter(completed=False,user=request.user).count()
+  context = {'todos':todos,'done':done,'incomplete':incomplete}
+  return render(request,'Todo/my_report.html',context)                                           
