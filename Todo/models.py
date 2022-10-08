@@ -17,7 +17,7 @@ class Todo(models.Model):
 class Profile(models.Model):
   user = models.OneToOneField(User,on_delete=models.CASCADE)
   bio = models.TextField()
-  avatar = models.ImageField(default='profile1.png',null=True)
+  avatar = models.ImageField(default='profile2.png',null=True)
   
   def __str__(self):
     return f'{self.user.username} Profile'
